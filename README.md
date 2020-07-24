@@ -1,4 +1,4 @@
-# [rebrowse] (https://github.com/arrowgent/rebrowse/blob/master/rebrowse)
+# [rebrowse](https://github.com/arrowgent/rebrowse/blob/master/rebrowse)
 based on LinuxMint (ubuntu) MATE
 
 **modify "default browser" to use various system tools to open applications**
