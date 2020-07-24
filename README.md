@@ -6,7 +6,7 @@ based on LinuxMint (ubuntu) MATE
 originally designed for Discord in a Firejail
 can also be used in Chatty
 
-you will need to create this as the "Default Browser" system wide to a take effect
+you will need to create this as the "Default Browser" system wide to a take effect;
 some options to do this:
 
 # * overrides:
