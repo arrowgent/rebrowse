@@ -1,7 +1,7 @@
 # rebrowse
-modify "default browser" to use various system tools to open applications
-
 based on LinuxMint (ubuntu) MATE
+
+**modify "default browser" to use various system tools to open applications**
 
 originally designed for Discord in a Firejail
 can also be used in Chatty
@@ -29,9 +29,9 @@ some options to do this:
 * #update-desktop-database ~/.local/share/applications
 * #sudo update-mime-database /usr/share/mime
 
-* #sudo update-alternatives --install <link> <name> <path> <priority>
-* #sudo update-alternatives --config x-www-browser
-* #sudo update-alternatives --config gnome-www-browser
+* __#sudo update-alternatives --install <link> <name> <path> <priority>__
+* __#sudo update-alternatives --config x-www-browser__
+* __#sudo update-alternatives --config gnome-www-browser__
 
 > file locations to check
 * #~/.local/share/applications
