@@ -12,8 +12,8 @@ some options to do this:
 # * overrides:
 
 ```
-> ~~#gvfs-mime --set x-scheme-handler/http rebrowse.desktop~~
-> ~~#gvfs-mime --set x-scheme-handler/https rebrowse.desktop~~
+> #gvfs-mime --set x-scheme-handler/http rebrowse.desktop
+> #gvfs-mime --set x-scheme-handler/https rebrowse.desktop
 
 > #xdg-mime default rebrowse.desktop x-scheme-handler/http
 > #xdg-mime default rebrowse.desktop x-scheme-handler/https
@@ -30,9 +30,9 @@ some options to do this:
 > #update-desktop-database ~/.local/share/applications
 > #sudo update-mime-database /usr/share/mime
 
-> __#sudo update-alternatives --install `<link>` `<name>` `<path>` `<priority>` __
-> __#sudo update-alternatives --config x-www-browser __
-> __#sudo update-alternatives --config gnome-www-browser __
+> #sudo update-alternatives --install `<link>` `<name>` `<path>` `<priority>`
+> #sudo update-alternatives --config x-www-browser
+> #sudo update-alternatives --config gnome-www-browser
 ```
 
 # * file locations to check
