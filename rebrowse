@@ -5,8 +5,9 @@
 #based on LinuxMint MATE
 
 httpf=( http\:\/\/ https\:\/\/ https\:\/\/ )
-images=( .bmp .gif .jpg .jpeg .pcx .png .psd .xcf .tga .tif .tiff .svg .webp .webp )
 video=( .avi .flv .gifv .m4p .m4v .mkv .mov .mp4 .mpeg .mpg .ogv .ogm .qt .vob .webm .wmv .wmv )
+images=( .bmp .jpg .jpeg .pcx .png .psd .xcf .tga .tif .tiff .svg .webp .webp )
+gifs=( .gif .gif )
 audio=( .aac .flac .m3u .m4a .mid .mod .mp3 .ogg .wav .wma .wma )
 yt=( youtu.be youtube.com youtube.com )
 ttv=( twitch.tv )
@@ -19,8 +20,9 @@ steam=( store.steampowered.com )
 IFS="|"
 durl="$1"
 httpf_url=$(grep -Ff <(printf "%s\n" "${httpf[@]}|${httpf[@]^^}") <(printf "%s\n" "$durl"))
-images_url=$(grep -Ff <(printf "%s\n" "${images[@]}|${images[@]^^}") <(printf "%s\n" "$durl"))
 video_url=$(grep -Ff <(printf "%s\n" "${video[@]}|${video[@]^^}") <(printf "%s\n" "$durl"))
+images_url=$(grep -Ff <(printf "%s\n" "${images[@]}|${images[@]^^}") <(printf "%s\n" "$durl"))
+gifs_url=$(grep -Ff <(printf "%s\n" "${gifs[@]}|${gifs[@]^^}") <(printf "%s\n" "$durl"))
 audio_url=$(grep -Ff <(printf "%s\n" "${audio[@]}|${audio[@]^^}") <(printf "%s\n" "$durl"))
 yt_url=$(grep -Ff <(printf "%s\n" "${yt[@]}") <(printf "%s\n" "$durl"))
 ttv_url=$(grep -Ff <(printf "%s\n" "${ttv[@],,}") <(printf "%s\n" "$durl"))
@@ -47,6 +49,19 @@ case $durl in
                                 ifile=$(wget -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
                                 echo $ifile
                                 exec nomacs $ifile
+                            else
+                                echo $durl
+                                exec nomacs $durl
+                            fi
+                        done;;
+   "${gifs_url[@]}") for ifile in $durl
+                        do
+                            if [ $durl == "${httpf_url[@]}" ]
+                            then
+                                ifile=$(wget -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
+                                echo $ifile
+                                mv $ifile $ifile.gif
+                                exec nomacs $ifile.gif
                             else
                                 echo $durl
                                 exec nomacs $durl
