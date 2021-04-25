@@ -4,8 +4,9 @@
 #in discord (firejailed or not) open urls for each filetype
 #based on LinuxMint MATE
 
+httpf=( http\:\/\/ https\:\/\/ https\:\/\/ )
 images=( .bmp .gif .jpg .jpeg .pcx .png .psd .xcf .tga .tif .tiff .svg .webp .webp )
-video=( .avi .flv .m4p .m4v .mkv .mov .mp4 .mpeg .mpg .ogv .ogm .qt .vob .webm .wmv .wmv )
+video=( .avi .flv .gifv .m4p .m4v .mkv .mov .mp4 .mpeg .mpg .ogv .ogm .qt .vob .webm .wmv .wmv )
 audio=( .aac .flac .m3u .m4a .mid .mod .mp3 .ogg .wav .wma .wma )
 yt=( youtu.be youtube.com youtube.com )
 ttv=( twitch.tv )
@@ -17,6 +18,7 @@ steam=( store.steampowered.com )
 
 IFS="|"
 durl="$1"
+httpf_url=$(grep -Ff <(printf "%s\n" "${httpf[@]}|${httpf[@]^^}") <(printf "%s\n" "$durl"))
 images_url=$(grep -Ff <(printf "%s\n" "${images[@]}|${images[@]^^}") <(printf "%s\n" "$durl"))
 video_url=$(grep -Ff <(printf "%s\n" "${video[@]}|${video[@]^^}") <(printf "%s\n" "$durl"))
 audio_url=$(grep -Ff <(printf "%s\n" "${audio[@]}|${audio[@]^^}") <(printf "%s\n" "$durl"))
@@ -37,12 +39,19 @@ fi
 #rm /tmp/firejail/*
 
 case $durl in
+   "${video_url[@]}") exec mpv --volume=66 --window-maximized=yes --force-seekable=yes --loop --osd-bar-h=2 --osd-bar-align-y=0.95 $durl;;
    "${images_url[@]}") for ifile in $durl
-                      do
-                      ifile=$(wget -N -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
-                      exec eom $ifile
-                      done;;
-   "${video_url[@]}") exec mpv $durl;;
+                        do
+                            if [ $durl == "${httpf_url[@]}" ]
+                            then
+                                ifile=$(wget -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
+                                echo $ifile
+                                exec nomacs $ifile
+                            else
+                                echo $durl
+                                exec nomacs $durl
+                            fi
+                        done;;
    "${audio_url[@]}") for afile in $durl
                       do
                       afile=$(wget -N -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
@@ -51,7 +60,7 @@ case $durl in
    "${yt_url[@]}") for ytfile in $durl
                       do
                       ytfile=$(youtube-dl --newline -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' -o '/tmp/firejail/%(title)s%(uploader)s' $durl|grep "Merging\ formats\ into\.*"|sed -r 's/.{31}//'|sed 's/.$//')
-                      exec mpv --window-maximized=yes --force-seekable=yes $ytfile
+                      exec mpv --window-maximized=yes --force-seekable=yes --loop $ytfile
                       done;;
    "${ttv_url[@]}") exec mpv --window-maximized=yes --force-seekable=yes $durl;;
    "${archive_url[@]}") for zfile in $durl
@@ -59,7 +68,7 @@ case $durl in
                       zfile=$(wget --restrict-file-names=nocontrol -N -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
                       exec engrampa $zfile
                       done;;
-   "${webpage_url[@]}") exec mate-terminal -x sh -c "lynx $durl";;
+   "${webpage_url[@]}") exec stterm -e surf $durl;;
    "${text_url[@]}") for tfile in $durl
                       do
                       tfile=$(wget -P /tmp/firejail $durl 2>&1|grep "Saving\ to:\.*"|sed -r 's/.{12}//'|sed 's/.$//')
