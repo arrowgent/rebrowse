@@ -1,15 +1,15 @@
 # [rebrowse](https://github.com/arrowgent/rebrowse/blob/master/rebrowse)
 based on LinuxMint (ubuntu) MATE
 
-**modify "default browser" to use various system tools to open applications**
+**modify Linux "default browser" to use various system tools to open applications**
 
 originally designed for Discord in a Firejail
 can also be used in Chatty
 
+# * overrides:
+
 you will need to create this as the "Default Browser" system wide to a take effect;
 some options to do this:
-
-# * overrides:
 
 ```
 > #gvfs-mime --set x-scheme-handler/http rebrowse.desktop
