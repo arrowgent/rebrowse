@@ -20,7 +20,7 @@ you can change these tools to fit your use & distro or DE.
 
 # * overrides:
 
-you will need to create this as the "Default Browser" system wide to a take effect; </ br>
+you will need to create this as the "Default Browser" system wide to a take effect; </br>
 some options to do this:
 
 ```
