@@ -3,10 +3,11 @@ based on LinuxMint (ubuntu) MATE
 
 **modify Linux "default browser" to use various system tools to open applications**
 
-originally designed for Discord in a Firejail </ br>
+originally designed for Discord in a Firejail </br>
 can also be used in Chatty
 
 # * tools used in rebrowse
+you can change these tools to fit your use & distro or DE.
 * audacious
 * leafpad
 * mpv
