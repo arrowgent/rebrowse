@@ -3,12 +3,23 @@ based on LinuxMint (ubuntu) MATE
 
 **modify Linux "default browser" to use various system tools to open applications**
 
-originally designed for Discord in a Firejail
+originally designed for Discord in a Firejail </ br>
 can also be used in Chatty
+
+# * tools used in rebrowse
+* audacious
+* leafpad
+* mpv
+* nomacs
+* steam
+* stterm
+* surf
+* xreader
+* youtube-dl (yt-dlp)
 
 # * overrides:
 
-you will need to create this as the "Default Browser" system wide to a take effect;
+you will need to create this as the "Default Browser" system wide to a take effect; </ br>
 some options to do this:
 
 ```
