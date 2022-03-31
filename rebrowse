@@ -19,6 +19,7 @@ steam=( store.steampowered.com )
 
 IFS="|"
 durl="$1"
+echo $1|xclip -selection clipboard;
 httpf_url=$(grep -Ff <(printf "%s\n" "${httpf[@]}|${httpf[@]^^}") <(printf "%s\n" "$durl"))
 video_url=$(grep -Ff <(printf "%s\n" "${video[@]}|${video[@]^^}") <(printf "%s\n" "$durl"))
 images_url=$(grep -Ff <(printf "%s\n" "${images[@]}|${images[@]^^}") <(printf "%s\n" "$durl"))
